@@ -1,0 +1,12 @@
+
+
+mkdir myapp2014
+cd myapp2014
+npm init                package.json 파일을 생성함
+npm install express     express지원
+npm install ejs         ejs지원 
+
+프로젝트만들때 
+--view 옵션 안주면 pug(jade) 엔진이 디폴트 
+express --view=ejs 프로젝트명 
+기본 다 만들어준다 

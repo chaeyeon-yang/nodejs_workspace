@@ -1,0 +1,66 @@
+1. nodejs는 자체적으로 웹서버/WAS를 구축할 수 있는 라이브러를 제공하고 있다 
+http 라이브러리를 가지고 있다 
+createServer  - 서버소켓을 작성한다. 
+listen 함수 - 서버소켓이 대기를 한다. 
+WAS가 따로 없다
+
+서버소켓 <=================================  클라이언트소켓 접속요청 
+      3000번 포트를 열어놓고 기다린다. 
+클라이언트소켓을 하나 생성해서  클라이언트소켓끼리 데이터를 주고받는다. 
+createServer 에 전달된 매개변수가 콜백함수고 이 콜백함수는 나한테 접속한 
+클라이언트들로부터 정보를 받아오는 함수 
+
+실제 물리적파일과 url은 달라야 한다 
+http://127.0.0.1:3000/    => /
+http://127.0.0.1:3000/member/join   => /member/join => 실제 물리적 파일까지 연결  
+서버가 물리적파일위치를 지정해줘야 한다 
+a href="가상주소"
+
+request 객체에 전달할 내용은 /member/join pathname으로 전달된다.
+index.html =>  <a href="/member/join">회원가입</a>
+
+path는 가상url(논리적주소)
+{"path":"/member", "func":member, "filename": "member/member_join"},   
+
+http://127.0.0.1:3000/member =================>  
+path.resolve(); //현재 프로젝트가 작동중인 폴더의 물리적경로를 준다 
+html/member/member_join.html  파일호출
+//물리적경로 
+request["filename"] = "member/member_join";
+
+path.resolve()+"/hmtl/" + "filename": "member/member_join"+".html"; 
+//프레임워크가 설치하면 프레임워크가 알아서 처리해준다 
+
+react library, framework? 
+nextjs - react framework -> 프론트앤드, nextjs안에서 서버처럼 쓸수 있는 컴포넌트가 
+존재해서 디비를 직접 붙일수 있긴한데 이걸로 실개발을 하면 
+
+풀스택 개발 : 프론트앤드와 백앤드를 쪼개서 각각 다른 별도의 프로세스로 실행시켜서 
+비동기통신(Ajax통신)을 통해서 서로 데이터를 주고 받는다 
+spa single page application => 현재 프론트개발이 이쪽으로 흘러감
+    multi page application => 페이지가 많았음 
+        프론트앤드                                   백앤드 서버 
+        react,angular,vue                                        nodejs  
+        spring boot 의 thymeleaf(이건아님)            spring boot(restful api)
+        vue                                           php 
+        안드로이드(코틀린, react native)              asp
+        아이폰(ios,react_native)..                   asp.net 
+
+single page application  개발방법 => 전체페이지가 하나임 
+일부분(보통 메뉴가 해당된다. router라고 부름)을 고정시켜 놓고 일부분만 
+체인지를 하는 방식 => 렌더링 속도가 빠르다. 화면전체가 로딩되는것이 아니고 
+일부분만 교체 시키는 방식이라 화면 출력 속도가 빠르다.
+단점 : 백앤드 서버와 Ajax통신을 많이 해야 해서 네트워크 속도 때문에 delay되는 경우
+가 있다.  
+
+
+
+
+
+
+
+
+
+
+
+

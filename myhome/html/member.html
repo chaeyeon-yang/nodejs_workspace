@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <form action="">
+        <input type="text" id="idcheckyn" value="N"> <!--아이디 사용가능 여부를 이곳에-->
+        <br/>
+        아이디 : <input type="text" id="userid"> 
+        <button type="button" id="btnIdCheck">아이디 중복 체크</button> <br/>
+        패스워드 : <input type="password" id="password"> <br/>
+        이름 : <input type="text" id="username"> <br/>
+        전화번호 : <input type="text" id="phone"> <br/>
+        이메일 : <input type="email" id="email"> <br/>
+
+        <button type="button" id="btnRegist">등록</button>
+
+    </form>
+</body>
+</html>
+
+<script>
+    window.onload = ()=>{
+        document.querySelector("#btnIdCheck").addEventListener("click",()=>{
+            //alert("click");
+            let userid = document.querySelector("#userid");
+            axios.get("/idcheck",{
+                params:{ userid:userid.value}
+            })
+            .then( res=>{
+                console.log( res.data);
+                if( res.data.useyn==="Y")
+                {
+                    //disabled  form태그로 보낼때 아예 막힘, readonly:값을보내기는 한다 
+                    document.querySelector("#idcheckyn").value="Y";
+                    document.querySelector("#idcheckyn").readOnly=true;
+                    document.querySelector("#userid").readOnly=true;//입력
+                    document.querySelector("#btnIdCheck").disabled = true; //버튼의 경우
+                }
+            })
+            .catch( err=>{
+                console.log( err);
+            })
+        });
+
+        document.querySelector("#btnRegist").addEventListener("click",()=>{
+            let userid = document.querySelector("#userid").value;
+            let password = document.querySelector("#password").value;
+            let username = document.querySelector("#username").value;
+            let phone = document.querySelector("#phone").value;
+            let email= document.querySelector("#email").value;
+            
+            if( document.querySelector("#idcheckyn").value!="Y")
+            {
+                alert("아이디 중복체크를 하세요");
+                return false;//서버로 전송을 막는다 
+            }
+            
+            axios.get("/regist",{
+                params:{ userid:userid, password:password, username:username, 
+                         phone:phone, email:email}
+            }).then( (res)=>{
+                alert(res.data.msg);
+            })
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+//pug -> jade를 pug라고 부른다. 
+cd /하나은행실습/nodejs_workspace
+
+폴더랑 필요한 최소한의 코드들을 알아서 생성해준다 
+마치 스프링처럼 프로젝트를 만들어준다. 
+스프링내부구조 이해를 해야 => 더 잘 사용할 수 있다
+
+express --view=ejs myapp
+ change directory:
+     > cd myapp
+
+   install dependencies:
+     > npm install
+
+   run the app:
+     > SET DEBUG=myapp:* & npm start
+
+
+//SET 명령어 - os의 환경변수 바꾸기 
+//고급시스템설정 - 환경변수 

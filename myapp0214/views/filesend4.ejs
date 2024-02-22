@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<!--  filesend1.ejs -->
+    <h1>파일 한개 전송하기</h1>
+    <!-- 
+        method="post" enctype="multipart/form-data" 둘다 있어야 파일이 전송된다. 
+        파일업로드는 파일이 업로드될 물리적 경로가 필요하고 
+        보통은 20~30M 를 넘으면 안된다. 
+        그리고 파일은 body로 정보를 보내는데 이 정보를 처리하는 방법이 힘들어서 
+        보통은 이미 만들어진 라이브러리를 사용한다. 
+        각 프레임워크마다 자주 사용하는 라이브러리가 다 다르고 
+        사용법도 상이하다.  구글서 nodejs 파일업로드 라고 검색하고 
+        보통 2~3년 내의 내용을 참고하는것이 바람직하다. 
+        multer 라는 라이브러리를 요즘 많이 쓰고 있음. 다른것도 많음 
+        선택의 문제이다 
+    -->
+    <h1>Ajax기술로 파일을 전송한다.</h1>
+    <form name="myform" id="myform" method="post" enctype="multipart/form-data" action="/filesave2">
+        comment : <input type="text" name="comment" id="comment"><br/>
+        file : <input type="file" name="file" id="file"><br/>
+        file : <input type="file" name="file" id="file"><br/>
+        file : <input type="file" name="file" id="file"><br/>
+        <button id="btnSend" type="button">전송</button>
+    </form>  
+    
+    이미지 : 
+    <img src="/KakaoTalk_20221125_102609160_011707896093939.png" alt="">
+</body>
+</html>
+<script>
+    window.onload = ()=>{
+        document.querySelector("#btnSend").addEventListener("click", async ()=>{
+            //FormData(폼객체)=> 파일로 전송하기 위한 formData개체를 만들어야 한다
+            //document.myform;  //name속성일때 
+            //document.forms[0]; 문서에 <form>~</form> 태그를 여러번 쓸 경우 
+            //각 폼객체 관리용 배열이 존재한다.
+            //document.forms 배열에 폼객체 정보가 저장되어 있다 
+            //document.querySelector("#myform")
+            //jquery로 접근할때는 $("#myform")[0];  jquery가 id로 객체 접근할떄 
+            //항상 배열임 그래서 인덱스 생략 못함 
+             
+            let formData = new FormData(document.getElementById("myform"));
+            //console.log( formData );
+            //in => of로 변경하고 확인하기 
+            for(key of formData.keys())
+            {
+                console.log(key, formData.get(key));
+            }
+
+            const {data} = await  axios({
+                    url:"/filesave2",
+                    method:"POST",
+                    data:formData,
+                    headers:{
+                        "Content-Type":"multipart/form-data",
+                        "Authorization":"Bearer api token"
+                    }
+            });
+            console.log(data);
+            alert(data.result);
+        });
+    }
+</script>

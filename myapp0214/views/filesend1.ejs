@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--  filesend1.ejs -->
+    <h1>파일 한개 전송하기</h1>
+    <!-- 
+        method="post" enctype="multipart/form-data" 둘다 있어야 파일이 전송된다. 
+        파일업로드는 파일이 업로드될 물리적 경로가 필요하고 
+        보통은 20~30M 를 넘으면 안된다. 
+        그리고 파일은 body로 정보를 보내는데 이 정보를 처리하는 방법이 힘들어서 
+        보통은 이미 만들어진 라이브러리를 사용한다. 
+        각 프레임워크마다 자주 사용하는 라이브러리가 다 다르고 
+        사용법도 상이하다.  구글서 nodejs 파일업로드 라고 검색하고 
+        보통 2~3년 내의 내용을 참고하는것이 바람직하다. 
+        multer 라는 라이브러리를 요즘 많이 쓰고 있음. 다른것도 많음 
+        선택의 문제이다 
+    -->
+    <form method="post" enctype="multipart/form-data" action="/filesave1">
+        comment : <input type="text" name="comment" id="comment"><br/>
+        file : <input type="file" name="file" id="file">
+
+        <button id="btnSend">전송</button>
+    </form>    
+</body>
+</html>

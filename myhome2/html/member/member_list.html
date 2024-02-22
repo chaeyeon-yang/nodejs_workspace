@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>회원목록</h1>
+
+    <table>
+        
+    <% for(item of member_list) { %>
+        <tr>
+            <td><%=item.userid%></td>
+            <td><%=item.username%></td>
+            <td><%=item.phone%></td>
+            <td><%=item.email%></td>
+        </tr>
+    <%} %>
+    </table>
+</body>
+</html>

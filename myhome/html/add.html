@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="myform" id="myform" action="">
+        
+    x : <input type="text" name="x" id=""> <br/>
+    y : <input type="text" name="y" id=""> <br/>
+    <!--   -->
+    <br/>
+    <select name="operator">
+        <option value="1">더하기</option>
+        <option value="2">빼기</option>
+        <option value="3">곱하기</option>
+        <option value="4">나누기</option>
+    </select> 
+    <br/>
+
+    <button type="button" id="btnAdd">보내기</button>
+    </form>
+</html>
+
+<script>
+    document.addEventListener("load", (event) => {
+        document.getElementById("btnAdd").addEventListener("click", ()=>{
+            //폼태그 이름, 아이디, 없는 경우 
+            //let frm = document.forms[0];
+            //let frm = document.myform;
+            let frm = document.getElementById("myform"); //버전 상관없이 가능 
+            frm.action="/add_result"; //서버에서 응답을할 url 지정
+            frm.method="GET"; //서버 전송 방법, 안쓰면 무조건 GET방식임 
+            frm.submit(); //서버로 전송하기 
+        });
+    });
+
+    //document.addEventListener("load", (event) => {});
+    //window.onload = ()=>{    }
+</script>
